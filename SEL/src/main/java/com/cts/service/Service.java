@@ -24,6 +24,8 @@ import com.cts.operator.Operator;
 
 public class Service {
 
+	RuleEngine ruleEngine;
+
 	public void readExcel() {
 
 		List<Rule> listRule = new ArrayList<Rule>();
@@ -92,7 +94,7 @@ public class Service {
 				Rule rule = new Rule(ruleFactList);
 				listRule.add(rule);
 			}
-			RuleEngine ruleEngine = new RuleEngine(listRule);
+			ruleEngine = new RuleEngine(listRule);
 
 		}
 
@@ -101,7 +103,6 @@ public class Service {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -158,18 +159,14 @@ public class Service {
 				}
 			}
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 		System.out.println(listPerson);
-		RuleEngine ruleEngine=new RuleEngine();
+
 		ruleEngine.applyRule(listPerson);
-		
-		// (listRule,listPerson);
 
 	}
 
