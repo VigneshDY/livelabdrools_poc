@@ -23,12 +23,11 @@ import com.cts.model.Rule;
 import com.cts.operator.Operator;
 
 public class Service {
-
-	RuleEngine ruleEngine;
+	List<Rule> listRule = new ArrayList<Rule>();
+	List<Person> listPerson = new ArrayList<Person>();
 
 	public void readExcel() {
 
-		List<Rule> listRule = new ArrayList<Rule>();
 		Map<String, Integer> map = new LinkedHashMap<String, Integer>();
 		String attribute[] = new String[2];
 		try {
@@ -36,11 +35,10 @@ public class Service {
 			Workbook workbook = new XSSFWorkbook(excelFile);
 			Sheet datatypeSheet = (Sheet) workbook.getSheetAt(0);
 			Iterator<Row> iterator = datatypeSheet.iterator();
-			String t = "";
 
-			int count = 0;
+			int countAttribute = 0;
 			String operator[] = new String[2];
-			int count1 = 0;
+			int countOperator = 0;
 			while (iterator.hasNext()) {
 
 				Row currentRow = iterator.next();
@@ -49,8 +47,8 @@ public class Service {
 				while (cellIterator.hasNext()) {
 
 					Cell currentCell = cellIterator.next();
-					attribute[count] = currentCell.toString();
-					count++;
+					attribute[countAttribute] = currentCell.toString();
+					countAttribute++;
 				}
 				break;
 
@@ -64,8 +62,8 @@ public class Service {
 				while (cellIterator.hasNext()) {
 
 					Cell currentCell = cellIterator.next();
-					operator[count1] = currentCell.toString();
-					count1++;
+					operator[countOperator] = currentCell.toString();
+					countOperator++;
 
 				}
 				break;
@@ -81,8 +79,7 @@ public class Service {
 				List<RuleFact> ruleFactList = new ArrayList<RuleFact>();
 				while (cellIterator.hasNext()) {
 					Cell currentCell = cellIterator.next();
-					// t = t + currentCell.toString() + " ";
-					//
+
 					RuleFact ruleFact = new RuleFact();
 					ruleFact.setAttribute(attribute[cellIndex]);
 					ruleFact.setOperator(operator[cellIndex]);
@@ -94,7 +91,6 @@ public class Service {
 				Rule rule = new Rule(ruleFactList);
 				listRule.add(rule);
 			}
-			ruleEngine = new RuleEngine(listRule);
 
 		}
 
@@ -107,67 +103,60 @@ public class Service {
 	}
 
 	public void readPsv() {
-		BufferedReader br;
-		List<Person> listPerson = new ArrayList<Person>();
-
 		try {
-			br = new BufferedReader(new FileReader("C:\\Users\\690257\\Desktop\\personinput.psv"));
-
+			BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\690257\\Desktop\\personinput.psv"));
 			String line = "";
-			Person p = new Person();
-			int i = 0;
-			Integer l = 0;
+			Person person = new Person();
+			int index = 0;
+			Integer length = 0;
 			String count = "0";
 			Map<String, String> map = new LinkedHashMap<String, String>();
 
 			String[] temp = new String[5];
-
 			while ((line = br.readLine()) != null) {
 
-				if (i == 0) {
+				if (index == 0) {
 					String arr[] = line.split("\\|");
-					p.setId(arr[0]);
-					p.setFirstName(arr[1]);
-					p.setLastName(arr[2]);
-					p.setLocation(arr[3]);
-					p.setTimeZone(arr[4]);
-					temp[0] = p.getId();
-					temp[1] = p.getFirstName();
-					temp[2] = p.getLastName();
-					temp[3] = p.getLocation();
-					temp[4] = p.getTimeZone();
+					person.setId(arr[0]);
+					person.setFirstName(arr[1]);
+					person.setLastName(arr[2]);
+					person.setLocation(arr[3]);
+					person.setTimeZone(arr[4]);
+					temp[0] = person.getId();
+					temp[1] = person.getFirstName();
+					temp[2] = person.getLastName();
+					temp[3] = person.getLocation();
+					temp[4] = person.getTimeZone();
 					for (int j = 0; j < arr.length; j++) {
 
 						map.put(arr[j], count);
-						l++;
-						count = l.toString();
+						length++;
+						count = length.toString();
 
 					}
-					i++;
+					index++;
 				} else {
 
 					String arr1[] = line.split("\\|");
-					Person p1 = new Person();
-					int k = 0;
-					p1.setId(arr1[Integer.parseInt(map.get(temp[k]))]);
-					p1.setFirstName(arr1[Integer.parseInt(map.get(temp[k = k + 1]))]);
-					p1.setLastName(arr1[Integer.parseInt(map.get(temp[k = k + 1]))]);
-					p1.setLocation(arr1[Integer.parseInt(map.get(temp[k = k + 1]))]);
-					p1.setTimeZone(null);
-					listPerson.add(p1);
+					Person person1 = new Person();
+					// int k = 0;
+					person1.setId(arr1[Integer.parseInt(map.get(temp[0]))]);
+					person1.setFirstName(arr1[Integer.parseInt(map.get(temp[1]))]);
+					person1.setLastName(arr1[Integer.parseInt(map.get(temp[2]))]);
+					person1.setLocation(arr1[Integer.parseInt(map.get(temp[3]))]);
+					person1.setTimeZone(null);
+					listPerson.add(person1);
 
 				}
 			}
-		} catch (NumberFormatException e) {
+
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		System.out.println(listPerson);
-
+		RuleEngine ruleEngine = new RuleEngine(listRule);
 		ruleEngine.applyRule(listPerson);
 
 	}
-
 }

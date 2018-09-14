@@ -13,21 +13,18 @@ import com.cts.model.Person;
 import com.cts.model.Rule;
 
 public class RuleEngine {
-
+	List<Person> personList;
 	List<Rule> rulesList;
 	Map<Rule, String> inputExpMap = new LinkedHashMap<Rule, String>();
 
-	public RuleEngine() {
-
-	}
-
 	public RuleEngine(List<Rule> rulesList) {
 		this.rulesList = rulesList;
+
 		for (Rule rule : rulesList) {
 			inputExpMap.put(rule, parseInputRule(rule.getInput()));
 		}
 		for (Map.Entry<Rule, String> entry : inputExpMap.entrySet()) {
-			System.out.println("---Rule---" + entry.getKey() + "---Expression---" + entry.getValue());
+			System.out.println("---Rule------" + entry.getKey() + "---Expression---" + entry.getValue());
 		}
 
 	}
@@ -45,39 +42,27 @@ public class RuleEngine {
 			if (ruleFact.getValue().contains("%")) {
 				value = value.replace("%", ".*");
 			}
-			bufferString.append("'"+value+"'");
+			bufferString.append("'" + value + "'");
 		}
 
 		return bufferString.toString();
+
 	}
 
 	public void applyRule(List<Person> personList) {
 		for (Person person : personList) {
 			for (Rule rule : rulesList) {
-				String exp = inputExpMap.get(rule);
-				//String exp2 = exp.replace("location", "'location'");
-				ExpressionParser expParser = new SpelExpressionParser();
-				//Expression expression = expParser.parseExpression(exp2).getValue(p,boolean.class);
-				boolean value = expParser.parseExpression(exp).getValue(person,boolean.class);
-				
-				//System.out.println("hi"+rule);
-				//System.out.println(value);
-				if(value)
-				{
+				ExpressionParser parser = new SpelExpressionParser();
+				Expression exp = parser.parseExpression(inputExpMap.get(rule)); 
+				boolean status = exp.getValue(person, Boolean.class);
+				if (status) {
 					person.setTimeZone(rule.getOutput().get(0).getValue().toString());
-				//	System.out.println(rule.getOutput().get(0).getValue().toString());
+					
 					break;
 				}
 			}
-		
-			System.out.println(person);
-			}
-		}
-		/*
-		 * ExpressionParser expParser = new SpelExpressionParser(); for (Person
-		 * p : personList) { Expression expression =
-		 * expParser.parseExpression(inputExpMap.); } }
-		 */
 
-	
+			System.out.println(person);
+		}
+	}
 }

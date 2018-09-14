@@ -6,12 +6,12 @@ import java.util.List;
 import com.cts.service.RuleEngine;
 import com.cts.service.RuleFact;
 
+
 public class Rule {
 
 	private List<RuleFact> input = new ArrayList<RuleFact>();
 
 	private List<RuleFact> output = new ArrayList<RuleFact>();
-	
 
 	public Rule(List<RuleFact> ruleFacts) {
 		for (RuleFact ruleFact : ruleFacts) {
@@ -21,12 +21,12 @@ public class Rule {
 				output.add(ruleFact);
 			}
 		}
-		/*RuleEngine ruleEngine = new RuleEngine(input);*/
 		
+
 	}
 
 	public Rule() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public List<RuleFact> getInput() {
@@ -49,11 +49,13 @@ public class Rule {
 	public String toString() {
 		return "Rule [input=" + input + ", output=" + output + "]";
 	}
-public List<RuleFact> parseInputRuleFact(){
-	return input;
-}
-public List<RuleFact> parseOutputRuleFact(){
-	return output;
-}
-	
+
+	public List<RuleFact> parseInputRuleFact() {
+		return input;
+	}
+
+	public List<RuleFact> parseOutputRuleFact() {
+		return output;
+	}
+
 }
