@@ -1,89 +1,94 @@
 package com.livelabdrools.reader;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
+import com.livelabdrools.model.Data;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.livelabdrools.model.Rule;
-import com.livelabdrools.model.RuleFact;
-
 public class ExcelReader implements ReadFile {
-	private static String excel = "C:\\Users\\674448\\Desktop\\SpringEL_Rule.xlsx";
-	List<Rule> listRule = new ArrayList<Rule>();
-	
-	public String getHeader() {
-		String input = "";
-		Map<String, Integer> map = new LinkedHashMap<String, Integer>();
+	public Data readFile(File fileToRead, int noOfHeaders) {
+		Data data = new Data();
+		data.setHeader(this.getHeader(fileToRead, noOfHeaders));
+		data.setHeader(this.getData(fileToRead, noOfHeaders));
+		return data;
+	}
+
+	public List<String[]> getHeader(File fileToRead, int noOfHeaders) {
+		int index = 0;
+		List<String[]> headerList = new ArrayList<String[]>();
+		FileInputStream excelFile = null;
 		try {
-			FileInputStream excelFile = new FileInputStream(new File(excel));
+			String input = "";
+			excelFile = new FileInputStream(fileToRead);
 			Workbook workbook = new XSSFWorkbook(excelFile);
 			Sheet datatypeSheet = (Sheet) workbook.getSheetAt(0);
 			Iterator<Row> iterator = datatypeSheet.iterator();
 			int noOfColumns = datatypeSheet.getRow(0).getPhysicalNumberOfCells();
-
-			while (iterator.hasNext()) {
+			while ((iterator.hasNext()) && index < noOfHeaders) {
+				String[] data = new String[noOfColumns];
+				index++;
 				Row currentRow = iterator.next();
 				Iterator<Cell> cellIterator = currentRow.iterator();
+				int colPosition = 0;
 				while (cellIterator.hasNext()) {
-					Cell currentCell = cellIterator.next();
-					input = input + " " + currentCell;
-
+					data[colPosition] = cellIterator.next().getStringCellValue();
+					++colPosition;
 				}
-				break;
-			}
-
-			while (iterator.hasNext()) {
-				Row currentRow = iterator.next();
-				Iterator<Cell> cellIterator = currentRow.iterator();
-				while (cellIterator.hasNext()) {
-					Cell currentCell = cellIterator.next();
-					input = input + "-" + currentCell;
-				}
-				break;
+				headerList.add(data);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(null != excelFile)
+					excelFile.close();
+			}catch (IOException e){
+				e.printStackTrace();
+			}
 		}
-
-		return input;
+			return headerList;
 	}
 
-	public String getData() {
-		String input = "";
+	public List<String[]> getData(File fileToRead, int noOfHeaders) {
+		int index = 0;
+		List<String[]> dataList = new ArrayList<String[]>();
+		FileInputStream excelFile = null;
 		try {
-			FileInputStream excelFile = new FileInputStream(new File("excel"));
+			String input = "";
+			excelFile = new FileInputStream(fileToRead);
 			Workbook workbook = new XSSFWorkbook(excelFile);
 			Sheet datatypeSheet = (Sheet) workbook.getSheetAt(0);
 			Iterator<Row> iterator = datatypeSheet.iterator();
-			iterator.next();
-			iterator.next();
-			while (iterator.hasNext()) {
+			int noOfColumns = datatypeSheet.getRow(0).getPhysicalNumberOfCells();
+			while ((iterator.hasNext()) && index >= noOfHeaders) {
+				String[] data = new String[noOfColumns];
+				index++;
 				Row currentRow = iterator.next();
 				Iterator<Cell> cellIterator = currentRow.iterator();
-				int cellIndex = 0;
-				List<RuleFact> ruleFactList = new ArrayList<RuleFact>();
+				int colPosition = 0;
 				while (cellIterator.hasNext()) {
-					Cell currentCell = cellIterator.next();
-					input = input + " " + currentCell.toString();
+					data[colPosition] = cellIterator.next().getStringCellValue();
+					++colPosition;
 				}
-
+				dataList.add(data);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(null != excelFile)
+					excelFile.close();
+			}catch (IOException e){
+				e.printStackTrace();
+			}
 		}
-		return input;
+		return dataList;
 	}
-
 }

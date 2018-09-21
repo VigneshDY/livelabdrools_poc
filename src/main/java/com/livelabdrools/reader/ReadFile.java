@@ -1,8 +1,9 @@
 package com.livelabdrools.reader;
 
-import java.util.List;
-public interface ReadFile<T> {
+import com.livelabdrools.model.Data;
 
-	public String[] getHeader();
-	 public String[] getData();
+import java.io.File;
+
+public interface ReadFile<T> {
+	 public abstract Data readFile(File fileToRead, int noOfHeaders);
 }
