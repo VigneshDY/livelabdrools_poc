@@ -2,14 +2,23 @@ package com.livelabdrools.mapper;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public abstract class DataMapper<T> {
+import com.livelabdrools.reader.ReadFile;
+
+public abstract class DataMapper {
 	
-	@Autowired
-	private File file;
+	private Map<String, ReadFile> fileReaders;
+	
+	static {
+//		fileReaders.
+	}
 	
 	
-	public abstract List<T> getData(String line);
+	
+	public abstract List<Object> getData(List<String[]> header,List<String[]> data);
+	
 }
+
