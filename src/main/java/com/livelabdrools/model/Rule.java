@@ -1,14 +1,11 @@
-package com.cts.model;
+package com.livelabdrools.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cts.service.RuleEngine;
-import com.cts.service.RuleFact;
 
 
 public class Rule {
-
 	private List<RuleFact> input = new ArrayList<RuleFact>();
 
 	private List<RuleFact> output = new ArrayList<RuleFact>();
@@ -21,12 +18,11 @@ public class Rule {
 				output.add(ruleFact);
 			}
 		}
-		
 
 	}
 
 	public Rule() {
-		
+
 	}
 
 	public List<RuleFact> getInput() {
@@ -57,5 +53,4 @@ public class Rule {
 	public List<RuleFact> parseOutputRuleFact() {
 		return output;
 	}
-
 }
