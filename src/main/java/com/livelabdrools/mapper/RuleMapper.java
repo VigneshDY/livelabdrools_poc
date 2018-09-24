@@ -60,3 +60,5 @@ public class RuleMapper extends DataMapper {
 		return rule;
 	}
 }
+
+

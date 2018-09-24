@@ -7,11 +7,15 @@ import java.util.Map;
 
 import com.livelabdrools.model.Person;
 import com.livelabdrools.reader.DelimiterReader;
+import com.livelabdrools.utility.TimeTracker;
+import org.apache.log4j.Logger;
 
 public class PersonMapper extends DataMapper{
-
+	private static	final Logger log= Logger.getLogger(PersonMapper.class);
 	@Override
 	public List<Object> getData(List<String[]> header, List<String[]> data) {
+		TimeTracker timeTracker=new TimeTracker();
+		log.info("Start time for person mapping "+timeTracker.getStartTime() );
 		List<Object> person=new ArrayList<Object> ();
 		Map<String,Integer> map=new HashMap<String,Integer> ();
 		int j=0;
@@ -45,6 +49,9 @@ public class PersonMapper extends DataMapper{
 				break;
 			}
 		}
+		timeTracker.setEndTime();
+		log.info("End time for person mapping "+timeTracker.getEndTime());
+		log.info("Total time for person mapper is "+timeTracker.getTotalTimeElapsed());
           return person;
 				
 			}
