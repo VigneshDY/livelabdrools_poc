@@ -13,7 +13,7 @@ public abstract class DataMapper {
 	private Map<String, ReadFile> fileReaders;
 	
 	static {
-//		fileReaders.
+
 	}
 	
 	

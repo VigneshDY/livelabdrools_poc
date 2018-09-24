@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.livelabdrools.model.Data;
+import com.livelabdrools.utility.TimeTracker;
 import com.sun.javafx.binding.StringConstant;
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.formula.functions.T;
 
 import com.livelabdrools.mapper.PersonMapper;
@@ -20,6 +22,7 @@ import javax.swing.text.StringContent;
 
 public class DelimiterReader implements ReadFile{
 
+	private static	final Logger log= Logger.getLogger(DelimiterReader.class);
 	private final String DELIMITOR;
 
 	public DelimiterReader (String delimiter) {
@@ -61,11 +64,15 @@ public class DelimiterReader implements ReadFile{
 }
 
 	public Data readFile(File fileToRead, int noOfHeaders) {
+		TimeTracker timeTracker =new TimeTracker();
+		log.info("Start time for reading delimiter "+timeTracker.getStartTime() );
 		Data data = new Data();
 
 		data.setHeader(this.getHeader(fileToRead, noOfHeaders));
 		data.setHeader(this.getData(fileToRead, noOfHeaders));
-
+          timeTracker.setEndTime();
+		log.info("End time for reading delimiter "+timeTracker.getEndTime() );
+         log.info("Total time for reading delimited file "+timeTracker.getTotalTimeElapsed());
 		return data;
 	}
 
