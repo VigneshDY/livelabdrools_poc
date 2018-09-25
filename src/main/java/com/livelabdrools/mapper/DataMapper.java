@@ -4,21 +4,28 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.livelabdrools.reader.DelimiterReader;
+import com.livelabdrools.reader.ExcelReader;
 import com.livelabdrools.reader.ReadFile;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
+@Component
 public abstract class DataMapper {
-	
-	private Map<String, ReadFile> fileReaders;
-	
-	static {
 
+protected ReadFile readFile;
+
+	protected Map<String, ReadFile> fileReaders;
+
+	@PostConstruct
+	public void init() {
+		fileReaders.put("xlsx",new ExcelReader());
+		fileReaders.put("csv",new DelimiterReader(","));
+		fileReaders.put("psv",new DelimiterReader("\\|"));
+		fileReaders.put("tsv",new DelimiterReader("\t"));
 	}
-	
-	
-	
-	public abstract List<Object> getData(List<String[]> header,List<String[]> data);
-	
-}
 
+	public abstract List getData(File file);
+
+}

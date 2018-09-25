@@ -22,21 +22,24 @@ import javax.swing.text.StringContent;
 
 public class DelimiterReader implements ReadFile{
 
+
 	private static	final Logger log= Logger.getLogger(DelimiterReader.class);
 	private final String DELIMITOR;
+
 
 	public DelimiterReader (String delimiter) {
 		this.DELIMITOR = delimiter;
 	}
 
-	private List<String[]> getHeader(File fileToRead, int noOfHeaders) {
+
+	public List<String[]> getHeader(File fileToRead, int noOfHeaderRows) {
 		int index = 0;
 		List<String[]> headerList = new ArrayList<String[]>();
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(fileToRead));
 			String line = "";
-			while ((line = br.readLine()) != null && index < noOfHeaders) {
+			while ((line = br.readLine()) != null && index < noOfHeaderRows) {
 				index++;
 				headerList.add(line.split(DELIMITOR));
 			}
@@ -46,7 +49,7 @@ public class DelimiterReader implements ReadFile{
 		return headerList;
 	}
 
-	private List<String[]> getData(File fileToRead, int noOfHeaders) {
+	public List<String[]> getData(File fileToRead, int noOfHeaders) {
 		int index = 0;
 		List<String[]> data = new ArrayList<String[]>();
 
@@ -69,7 +72,7 @@ public class DelimiterReader implements ReadFile{
 		Data data = new Data();
 
 		data.setHeader(this.getHeader(fileToRead, noOfHeaders));
-		data.setHeader(this.getData(fileToRead, noOfHeaders));
+		data.setData(this.getData(fileToRead, noOfHeaders));
           timeTracker.setEndTime();
 		log.info("End time for reading delimiter "+timeTracker.getEndTime() );
          log.info("Total time for reading delimited file "+timeTracker.getTotalTimeElapsed());

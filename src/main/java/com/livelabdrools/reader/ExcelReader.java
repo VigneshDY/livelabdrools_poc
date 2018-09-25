@@ -5,18 +5,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.livelabdrools.mapper.DataMapper;
 import com.livelabdrools.model.Data;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ExcelReader implements ReadFile {
+	@Autowired
+	protected DataMapper dataMapper;
 	public Data readFile(File fileToRead, int noOfHeaders) {
 		Data data = new Data();
 		data.setHeader(this.getHeader(fileToRead, noOfHeaders));
-		data.setHeader(this.getData(fileToRead, noOfHeaders));
+		data.setData(this.getData(fileToRead, noOfHeaders));
 		return data;
 	}
 
