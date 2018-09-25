@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.livelabdrools.mapper.DataMapper;
 import com.livelabdrools.model.Person;
 import com.livelabdrools.model.Rule;
 import com.livelabdrools.model.RuleFact;
@@ -12,9 +13,19 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 public class RuleEngine {
-    List<Person> personList;
-    List<Rule> rulesList;
-    Map<Rule, String> inputExpMap = new LinkedHashMap<Rule, String>();
+//    private DataMapper dataMapper;
+//
+//    public DataMapper getDataMapper() {
+//        return dataMapper;
+//    }
+//
+//    public void setDataMapper(DataMapper dataMapper) {
+//        this.dataMapper = dataMapper;
+//    }
+
+    private List<Person> personList;
+    private List<Rule> rulesList;
+    private Map<Rule, String> inputExpMap = new LinkedHashMap<Rule, String>();
 
     public RuleEngine(List<Rule> rulesList) {
         this.rulesList = rulesList;
