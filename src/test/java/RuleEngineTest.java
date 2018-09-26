@@ -8,14 +8,14 @@ import java.util.List;
 import org.junit.Test;
 
 import com.livelabdrools.model.RuleFact;
-import com.livelabdrools.rule.RuleEngine;
+import com.livelabdrools.rule.SpringRuleEngine;
 
 public class RuleEngineTest {
 
 	@Test
 	public void testParseInputRule() {
 		String str="Hii matches Hhhh";
-		RuleEngine re=new RuleEngine();
+		SpringRuleEngine re=new SpringRuleEngine();
 		List<RuleFact> inputList =new ArrayList<RuleFact>();
 		RuleFact rf=new RuleFact();
 		rf.setAttribute("Hii");
