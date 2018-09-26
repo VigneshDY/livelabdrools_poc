@@ -71,7 +71,8 @@ public class ExcelReader implements ReadFile {
 			Sheet datatypeSheet = (Sheet) workbook.getSheetAt(0);
 			Iterator<Row> iterator = datatypeSheet.iterator();
 			int noOfColumns = datatypeSheet.getRow(0).getPhysicalNumberOfCells();
-			while ((iterator.hasNext()) && index >= noOfHeaders) {
+			for(int i=0; i < noOfColumns; i++, iterator.next());
+			while ((iterator.hasNext())) {
 				String[] data = new String[noOfColumns];
 				index++;
 				Row currentRow = iterator.next();

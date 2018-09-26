@@ -19,14 +19,16 @@ public class RuleMapper extends DataMapper {
 	@Override
 	public List<Rule> getData(File inputFile) {
 
-		String[] fileParts = inputFile.getName().split(".");
+		System.out.println(inputFile.getName());
+		String[] fileParts = inputFile.getName().split("\\.");
+
 		String ext = fileParts[fileParts.length-1];
 		ReadFile fileReader = fileReaders.get(ext);
 		Data data = fileReader.readFile(inputFile,2);
 
 		List<String[]> dataList=data.getData();
 		List<String[]> headerList=data.getHeader();
-		List<RuleFact> ruleFactList=new ArrayList<RuleFact>();
+
 		List<Rule> ruleList=new ArrayList<Rule>();
 		Map<String,Integer> map=new HashMap<String,Integer> ();
 		int j=0;
@@ -49,6 +51,7 @@ public class RuleMapper extends DataMapper {
 		int cellIndex=0;
 		for(String[] data1:dataList)
 		{
+			List<RuleFact> ruleFactList=new ArrayList<RuleFact>();
 			cellIndex=0;
 			for(int i=0;i<data1.length;i++)
 			{

@@ -15,13 +15,12 @@ import org.apache.log4j.Logger;
 
 public class PersonMapper extends DataMapper{
 
-
 	private static	final Logger log= Logger.getLogger(PersonMapper.class);
-	@Override
 
+	@Override
 	public List<Person> getData(File inputFile) {
 		TimeTracker timeTracker=new TimeTracker();
-		String[] fileParts = inputFile.getName().split(".");
+		String[] fileParts = inputFile.getName().split("\\.");
 		String ext = fileParts[fileParts.length-1];
 		ReadFile fileReader = fileReaders.get(ext);
 		Data data = fileReader.readFile(inputFile,1);
