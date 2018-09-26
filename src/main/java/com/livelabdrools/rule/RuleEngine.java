@@ -12,16 +12,7 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-public class RuleEngine {
-//    private DataMapper dataMapper;
-//
-//    public DataMapper getDataMapper() {
-//        return dataMapper;
-//    }
-//
-//    public void setDataMapper(DataMapper dataMapper) {
-//        this.dataMapper = dataMapper;
-//    }
+public class RuleEngine implements SpringELRuleEngine{
 
     private List<Person> personList;
     private List<Rule> rulesList;
@@ -39,7 +30,7 @@ public class RuleEngine {
 
     }
 
-    private String parseInputRule(List<RuleFact> input) {
+  public String parseInputRule(List<RuleFact> input) {
         StringBuffer bufferString = new StringBuffer();
 
         for (RuleFact ruleFact : input) {
@@ -59,7 +50,7 @@ public class RuleEngine {
 
     }
 
-    public void applyRule(List<Person> personList) {
+    public void processData(List<Person> personList) {
         for (Person person : personList) {
             for (Rule rule : rulesList) {
                 ExpressionParser parser = new SpelExpressionParser();
@@ -71,8 +62,7 @@ public class RuleEngine {
                     break;
                 }
             }
-
-            System.out.println(person);
+             System.out.println(person);
         }
     }
 }

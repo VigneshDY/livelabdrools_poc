@@ -7,26 +7,19 @@ import com.livelabdrools.model.Person;
 import com.livelabdrools.rule.RuleEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.File;
 import java.util.List;
 
+@EnableAutoConfiguration
 public class Application {
 
     private DataMapper dataMapper;
 
     private RuleEngine ruleEngine;
-
-    public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
-        DataMapper dataMapper1=context.getBean(DataMapper.class);
-        String fileName=args[0];
-        File file=new File("fileName");
-
-
-    }
 
     public DataMapper getDataMapper() {
         return dataMapper;
@@ -43,4 +36,19 @@ public class Application {
     public void setRuleEngine(RuleEngine ruleEngine) {
         this.ruleEngine = ruleEngine;
     }
+
+    public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
+        Application app = (Application)context.getBean("app");
+        app.processData("C:\\Users\\672845\\Desktop\\personinput.psv"/*args[0]*/);
+    }
+
+    public void processData(String inputFile) {
+        File file=new File(inputFile);
+        List<Person> objToProcess = dataMapper.getData(file);
+        /*List<Person> processedObj = */ruleEngine.processData(objToProcess);
+        //processedObj
+    }
+
+
 }

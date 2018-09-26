@@ -22,12 +22,13 @@ public class SpringELConfiguration {
 
     private RuleEngine getRuleEngine() {
         DataMapper dataMapper = new RuleMapper();
-        List<Rule> ruleList = dataMapper.getData(new File("classpath:SpringEL_Rule.xlsx"));
+        ClassLoader classLoader = SpringELConfiguration.class.getClassLoader();
+        List<Rule> ruleList = dataMapper.getData(new File(classLoader.getResource("SpringEL_Rule.xlsx").getFile()));
         RuleEngine ruleEngine = new RuleEngine(ruleList);
         return ruleEngine;
     }
 
-    @Bean
+    @Bean("app")
     public Application getApplication() {
         Application app = new Application();
         app.setDataMapper(getPersonMapper());

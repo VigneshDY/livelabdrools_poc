@@ -50,13 +50,14 @@ public class DelimiterReader implements ReadFile{
 	}
 
 	public List<String[]> getData(File fileToRead, int noOfHeaders) {
-		int index = 0;
+		int index = noOfHeaders;
 		List<String[]> data = new ArrayList<String[]>();
 
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(fileToRead));
 			String line = "";
-			while ((line = br.readLine()) != null && index >= noOfHeaders) {
+			for(int i = 0; i < noOfHeaders; i++, br.readLine());
+			while ((line = br.readLine()) != null) {
 				index++;
 				data.add(line.split(DELIMITOR));
 			}
