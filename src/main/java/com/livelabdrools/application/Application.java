@@ -40,7 +40,7 @@ public class Application {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
         Application app = (Application)context.getBean("app");
-        app.processData("C:\\Users\\672845\\Desktop\\personinput.psv"/*args[0]*/);
+        app.processData("C:\\Users\\674448\\Desktop\\personinput.psv"/*args[0]*/);
     }
 
     public void processData(String inputFile) {
