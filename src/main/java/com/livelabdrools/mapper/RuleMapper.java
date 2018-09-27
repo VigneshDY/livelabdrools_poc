@@ -36,7 +36,7 @@ public class RuleMapper extends DataMapper {
 				map.put(head[i], j);
 				j++;
 			}
-
+			
 		}
 
 		String header1[]=new String[j];

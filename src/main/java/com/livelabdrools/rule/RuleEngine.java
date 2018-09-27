@@ -24,10 +24,7 @@ public class RuleEngine implements SpringELRuleEngine{
         for (Rule rule : rulesList) {
             inputExpMap.put(rule, parseInputRule(rule.getInput()));
         }
-        for (Map.Entry<Rule, String> entry : inputExpMap.entrySet()) {
-            System.out.println("Rule------" + entry.getKey() + "Expression---" + entry.getValue());
-        }
-
+     
     }
 
   public String parseInputRule(List<RuleFact> input) {
