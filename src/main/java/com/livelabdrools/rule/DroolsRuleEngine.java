@@ -14,12 +14,10 @@ public class DroolsRuleEngine implements RuleEngine{
         KieServices ks = KieServices.Factory.get();
         KieContainer kContainer = ks.getKieClasspathContainer();
         KieSession kSession = kContainer.newKieSession("ksession-rule");
-       // ConfigurableApplicationContext context=SpringApplication.run(Application.class,args);
-       // Service servObj=context.getBean(Service.class);
         for (Person person : personList) {
             kSession.insert(person);
         }
-        kSession.fireAllRules();
+        kSession.fireAllRules(personList.size());
         return personList;
     }
 
