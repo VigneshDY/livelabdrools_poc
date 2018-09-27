@@ -6,7 +6,7 @@ import com.livelabdrools.mapper.PersonMapper;
 import com.livelabdrools.mapper.RuleMapper;
 import com.livelabdrools.model.Rule;
 import com.livelabdrools.rule.RuleEngine;
-import com.livelabdrools.rule.SpringRuleEngine;
+import com.livelabdrools.rule.SpringELRuleEngine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,7 +24,7 @@ public class SpringELConfiguration {
         DataMapper dataMapper = new RuleMapper();
         ClassLoader classLoader = SpringELConfiguration.class.getClassLoader();
         List<Rule> ruleList = dataMapper.getData(new File(classLoader.getResource("SpringEL_Rule.xlsx").getFile()));
-        RuleEngine ruleEngine = new SpringRuleEngine(ruleList);
+        RuleEngine ruleEngine = new SpringELRuleEngine(ruleList);
         return ruleEngine;
     }
 

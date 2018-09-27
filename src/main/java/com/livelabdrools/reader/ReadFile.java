@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 @Service
 public interface ReadFile<T> {
-	 public abstract Data readFile(File fileToRead, int noOfHeaders);
+	Data readFile(File fileToRead, int noOfHeaders);
 }

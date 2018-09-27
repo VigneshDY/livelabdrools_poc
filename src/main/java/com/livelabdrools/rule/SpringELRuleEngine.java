@@ -11,21 +11,21 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-public class SpringRuleEngine implements RuleEngine{
+public class SpringELRuleEngine implements RuleEngine{
 
-    private List<Person> personList;
     private List<Rule> rulesList;
-    private Map<Rule, String> inputExpMap = new LinkedHashMap<Rule, String>();
+    private Map<Rule, Expression> inputExpMap = new LinkedHashMap<Rule, Expression>();
 
-    public SpringRuleEngine(List<Rule> rulesList) {
+    public SpringELRuleEngine(List<Rule> rulesList) {
         this.rulesList = rulesList;
-
+        ExpressionParser parser = new SpelExpressionParser();
         for (Rule rule : rulesList) {
-            inputExpMap.put(rule, parseInputRule(rule.getInput()));
+            inputExpMap.put(rule, parseInputRule(parser, rule.getInput()));
         }
        }
 
-  public String parseInputRule(List<RuleFact> input) {
+  public Expression parseInputRule(ExpressionParser parser, List<RuleFact> input) {
+
         StringBuffer bufferString = new StringBuffer();
 
         for (RuleFact ruleFact : input) {
@@ -41,16 +41,15 @@ public class SpringRuleEngine implements RuleEngine{
             bufferString.append("'" + value + "'");
         }
 
-        return bufferString.toString();
+        return parser.parseExpression(bufferString.toString());
 
     }
 
     public List<Person> processData(List<Person> personList) {
         for (Person person : personList) {
             for (Rule rule : rulesList) {
-                ExpressionParser parser = new SpelExpressionParser();
-                Expression exp = parser.parseExpression(inputExpMap.get(rule));
-                boolean status = exp.getValue(person, Boolean.class);
+
+                boolean status = inputExpMap.get(rule).getValue(person, Boolean.class);
                 if (status) {
                     person.setTimeZone(rule.getOutput().get(0).getValue().toString());
 
