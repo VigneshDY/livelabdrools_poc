@@ -17,34 +17,30 @@ public class PersonMapperTest {
 
 	@Test
 	public void testGetData() {
-		
+		//fail("Not yet implemented");
+		File file=new File("C:\\Users\\674448\\Desktop\\personinput.psv");
 		PersonMapper personMapper=new PersonMapper();
 		List<Person> person=new ArrayList<Person> ();
-		File inputFile=new File("C:\\Users\\674448\\Desktop\\personinput.psv");
-		String[] fileParts = inputFile.getName().split("\\.");
-		String ext = fileParts[fileParts.length-1];
-		DelimiterReader delimiterReader=new DelimiterReader("\\|");
-		List<String[]> data=delimiterReader.getData(inputFile, 1);		
+		String arr[]=new String[5];
+		arr[0]="1";
+		arr[1]="Sarath";
+		arr[2]="ranganathan";
+		arr[3]="Chennai";
+		arr[4]=null;
+		Person per=new Person();
+		per.setId(arr[0]);
+		per.setFirstName(arr[1]);
+		per.setLastName(arr[2]);
+		per.setLocation(arr[3]);
+		per.setTimeZone(arr[4]);
 		
-		for(String[] data1:data)
-		{
-			for(int i=0;i<data1.length;i++)
-			{
-				Person person1=new Person();
-				person1.setId(data1[i]);
-				person1.setFirstName(data1[i+1]);
-				person1.setLastName(data1[i+2]);
-				person1.setLocation(data1[i+3]);
-				person1.setTimeZone(null);
-				person.add(person1);
-				break;
-			}
-		}
-		assertEquals(person.get(0).getFirstName(), personMapper.getData(inputFile).get(0).getFirstName());
-		assertEquals(person.get(0).getLastName(), personMapper.getData(inputFile).get(0).getLastName());
-		assertEquals(person.get(0).getId(), personMapper.getData(inputFile).get(0).getId());
-		assertEquals(person.get(0).getLocation(), personMapper.getData(inputFile).get(0).getLocation());
-		assertEquals(person.get(0).getTimeZone(), personMapper.getData(inputFile).get(0).getTimeZone());
+		person.add(per);
+		
+		assertEquals(person.get(0).getFirstName(), personMapper.getData(file).get(0).getFirstName());
+		assertEquals(person.get(0).getLastName(), personMapper.getData(file).get(0).getLastName());
+		assertEquals(person.get(0).getId(), personMapper.getData(file).get(0).getId());
+		assertEquals(person.get(0).getLocation(), personMapper.getData(file).get(0).getLocation());
+		assertEquals(person.get(0).getTimeZone(), personMapper.getData(file).get(0).getTimeZone());
 		
 	}
 
