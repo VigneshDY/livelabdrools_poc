@@ -9,8 +9,5 @@
         <module name="livelab_drools_poc" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="livelab_drools_poc" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>
