@@ -48,7 +48,7 @@ public class Application {
         List<Person> objToProcess = dataMapper.getData(file);
         List<Person> processedObj =        ruleEngine.processData(objToProcess);
         System.out.println(processedObj);
-        //processedObj
+        
     }
 
 
