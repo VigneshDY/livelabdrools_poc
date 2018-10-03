@@ -1,10 +1,10 @@
-
+package com.livelabdrools.model;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.cts.operator.Operator;
+
 import com.livelabdrools.model.RuleFact;
 
 public class RuleFactTest {
