@@ -1,0 +1,8 @@
+com\livelabdrools\model\RuleEngineTest.class
+com\livelabdrools\mapper\RuleMapperTest.class
+com\livelabdrools\model\RuleFactTest.class
+com\livelabdrools\reader\ExcelReaderTest.class
+com\livelabdrools\mapper\PersonMapperTest.class
+com\livelabdrools\model\RuleTest.class
+com\livelabdrools\model\PersonTest.class
+com\livelabdrools\reader\DelimiterReaderTest.class

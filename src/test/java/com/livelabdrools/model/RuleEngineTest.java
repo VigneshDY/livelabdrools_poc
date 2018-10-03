@@ -13,7 +13,7 @@ import com.livelabdrools.rule.RuleEngine;
 public class RuleEngineTest {
 
 	@Test
-	public void testParseInputRule() {
+	public void testProcessData() {
 		/*String str="Hii matches Hhhh";
 		RuleEngine re=new RuleEngine();
 		List<RuleFact> inputList =new ArrayList<RuleFact>();
