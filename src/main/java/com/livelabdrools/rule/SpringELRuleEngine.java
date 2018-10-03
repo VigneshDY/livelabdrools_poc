@@ -11,13 +11,13 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-public class SpringRuleEngine implements RuleEngine{
+public class SpringELRuleEngine implements RuleEngine{
 
     private List<Person> personList;
     private List<Rule> rulesList;
     private Map<Rule, String> inputExpMap = new LinkedHashMap<Rule, String>();
 
-    public SpringRuleEngine(List<Rule> rulesList) {
+    public SpringELRuleEngine(List<Rule> rulesList) {
         this.rulesList = rulesList;
 
         for (Rule rule : rulesList) {

@@ -36,11 +36,11 @@ public class Application {
     }
 
     public static void main(String[] args) {
-//        ApplicationContext context = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
-        //Application app = (Application)context.getBean("app");
-        ApplicationContext context = new AnnotationConfigApplicationContext(DroolsConfiguration.class);
-        Application app = (Application)context.getBean("appDrools");
-        app.processData("C:\\Users\\690257\\Desktop\\personinput.psv"/*args[0]*/);
+        ApplicationContext context = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
+        Application app = (Application)context.getBean("app");
+      //ApplicationContext context = new AnnotationConfigApplicationContext(DroolsConfiguration.class);
+      //Application app = (Application)context.getBean("appDrools");
+        app.processData("C:\\Users\\690257\\Desktop\\personinput.psv");
     }
 
     public void processData(String inputFile) {

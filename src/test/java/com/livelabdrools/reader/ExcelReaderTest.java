@@ -13,7 +13,7 @@ public class ExcelReaderTest {
 	File file=new File("C:\\Users\\690257\\Desktop\\SpringEL_Rule.xlsx");
 	@Test
 	public void testGetHeader() {
-		int index = 0;
+
 		List<String[]> headerList = new ArrayList<String[]>();
 		ExcelReader excelReader = new ExcelReader();
 		String arr[] = new String[2];
