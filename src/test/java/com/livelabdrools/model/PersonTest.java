@@ -1,4 +1,4 @@
-
+package com.livelabdrools.model;
 
 import static org.junit.Assert.*;
 

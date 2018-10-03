@@ -1,50 +1,52 @@
 package com.livelabdrools.reader;
-import static org.junit.Assert.*;
+
 
 import org.junit.Test;
 
-import com.livelabdrools.model.Person;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class DelimiterReaderTest {
+    @Test
+    public void testGetHeader() {
 
-	@Test
-	public void testGetHeader() {
-		String str[]=new String[100];
-		str[0]="id";
-		str[1]="firstname";
-		str[2]="lastname";
-		str[3]="location";
-		str[4]="timezone";
-		DelimiterReader dr=new DelimiterReader();
-		assertArrayEquals(str, dr.getHeader());
-			}
-	
-	@Test
-	public void testGetData() {
-		DelimiterReader dr=new DelimiterReader();
-		String str[]=new String[100];
-		String arr1[]=new String[100];
-		
-		str[0]="1|Sarath|ranganathan|Chennai";
-		str[1]="2|Radha|tallu|Chennai";
-		str[2]="30|Prasanna|r|Chennai";
-		str[3]="50|Venkat|Nerella|NY";
-		str[4]="60|Ankit|Sharma|toronto";
-		str[5]="61|Rishab|Seth|Kolkata";
-		int j=0;
-		String s[]=new String[100];
-		for (int i = 0; i < str.length; i++) {
-			s=str[i].split("\\|");
-			while(j<s.length)
-			{
-			arr1[j]=s[i];
-			j++;
-			}
-		}
-			assertArrayEquals(arr1, dr.getData());
-		
-	
-		
-		
-	}
+        List<String[]> expected = new ArrayList<String[]>();
+        String[] expectedArr = new String[5];
+        expectedArr[0] = "id";
+        expectedArr[1] = "firstname";
+        expectedArr[2] = "lastname";
+        expectedArr[3] = "location";
+        expectedArr[4] = "timezone";
+        expected.add(expectedArr);
+        DelimiterReader delimiterReader = new DelimiterReader("\\|");
+        File filename = new File("C:\\Users\\690257\\Desktop\\personinput.psv");
+        List<String[]> actual = delimiterReader.getHeader(filename, 1);
+        assertEquals(expected.get(0), actual.get(0));
+    }
+
+    public void testGetData() {
+        int index = 1;
+        List<String[]> data = new ArrayList<String[]>();
+        DelimiterReader delimiterReader = new DelimiterReader("\\|");
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\690257\\Desktop\\personinput.psv"));
+            String line = "";
+            for (int i = 0; i < 1; i++, br.readLine())
+                ;
+            while ((line = br.readLine()) != null) {
+                index++;
+                data.add(line.split("\\|"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals(data.get(0),
+                delimiterReader.getHeader(new File("C:\\Users\\690257\\Desktop\\personinput.psv"), 1).get(0));
+    }
+
 }

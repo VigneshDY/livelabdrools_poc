@@ -1,14 +1,15 @@
-
+package com.livelabdrools.model;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import com.livelabdrools.model.RuleFact;
 import org.junit.Test;
 
-import com.cts.service.RuleFact;
 import com.livelabdrools.model.Rule;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RuleTest {
 
