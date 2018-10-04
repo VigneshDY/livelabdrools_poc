@@ -17,38 +17,37 @@ import java.util.List;
 @EnableAutoConfiguration
 public class Application {
 
-    private DataMapper dataMapper;
+	private DataMapper dataMapper;
 
-    private RuleEngine ruleEngine;
+	private RuleEngine ruleEngine;
 
-    public DataMapper getDataMapper() {
-        return dataMapper;
-    }
+	public DataMapper getDataMapper() {
+		return dataMapper;
+	}
 
-    public void setDataMapper(DataMapper dataMapper) {
-        this.dataMapper = dataMapper;
-    }
+	public void setDataMapper(DataMapper dataMapper) {
+		this.dataMapper = dataMapper;
+	}
 
-    public RuleEngine getRuleEngine() {
-        return ruleEngine;
-    }
+	public RuleEngine getRuleEngine() {
+		return ruleEngine;
+	}
 
-    public void setRuleEngine(RuleEngine ruleEngine) {
-        this.ruleEngine = ruleEngine;
-    }
+	public void setRuleEngine(RuleEngine ruleEngine) {
+		this.ruleEngine = ruleEngine;
+	}
 
-    public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
-        Application app = (Application)context.getBean("app");
-        app.processData("C:\\Users\\674448\\Desktop\\personinput.psv"/*args[0]*/);
-    }
+	public static void main(String[] args) {
+		ApplicationContext context = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
+		Application app = (Application) context.getBean("app");
+		app.processData("C:\\Users\\674448\\Desktop\\personinput.psv"/* args[0] */);
+	}
 
-    public void processData(String inputFile) {
-        File file=new File(inputFile);
-        List<Person> objToProcess = dataMapper.getData(file);
-        /*List<Person> processedObj = */ruleEngine.processData(objToProcess);
-        //processedObj
-    }
+	public void processData(String inputFile) {
+		File file = new File(inputFile);
+		List<Person> objToProcess = dataMapper.getData(file);
+		ruleEngine.processData(objToProcess);
 
+	}
 
-}
+	}
