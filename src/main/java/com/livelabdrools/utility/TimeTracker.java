@@ -2,24 +2,26 @@ package com.livelabdrools.utility;
 
 public class TimeTracker {
 
-    private long startTime=0;
-    private long endTime=0;
+	private Long startTime = (long)0;
+	private Long endTime = (long)0;
 
+	public TimeTracker() {
+		this.startTime = System.currentTimeMillis();
+	}
 
-    public TimeTracker() {
-        this.startTime=System.currentTimeMillis();
-    }
+	public Long getEndTime() {
+		return endTime;
+	}
 
-    public long getEndTime() {
-        return endTime;
-    }
+	public Long getStartTime() {
+		return startTime;
+	}
 
-    public long getStartTime() {
-        return startTime;
-    }    public void setEndTime(){
-        this.endTime=System.currentTimeMillis();
-    }
-    public long getTotalTimeElapsed(){
-         return endTime-startTime;
-    }
+	public void setEndTime() {
+		this.endTime = System.currentTimeMillis();
+	}
+
+	public Long getTotalTimeElapsed() {
+		return endTime - startTime;
+	}
 }
