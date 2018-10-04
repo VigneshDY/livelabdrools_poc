@@ -7,12 +7,14 @@ import java.util.Map;
 import com.livelabdrools.model.Person;
 import com.livelabdrools.model.Rule;
 import com.livelabdrools.model.RuleFact;
+
+import org.apache.log4j.Logger;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 public class SpringRuleEngine implements RuleEngine{
-
+	private static final Logger log = Logger.getLogger(SpringRuleEngine.class);
     private List<Person> personList;
     private List<Rule> rulesList;
     private Map<Rule, String> inputExpMap = new LinkedHashMap<Rule, String>();
@@ -45,7 +47,7 @@ public class SpringRuleEngine implements RuleEngine{
 
     }
 
-    public List<Person> processData(List<Person> personList) {
+    public void processData(List<Person> personList) {
         for (Person person : personList) {
             for (Rule rule : rulesList) {
                 ExpressionParser parser = new SpelExpressionParser();
@@ -60,7 +62,10 @@ public class SpringRuleEngine implements RuleEngine{
 
 
         }
-        return personList;
-    }
+        for(Person person : personList)
+        {
+       log.info(person+"\n");
+        }
+        }
 }
 

@@ -45,14 +45,19 @@ public class Application {
 	}
 
 	public static void main(String[] args) throws ParseException {
+		
 		TimeTracker timeTracker = new TimeTracker();
 		SimpleDateFormat sdf = new SimpleDateFormat("SS");
 		String startTime = timeTracker.getStartTime().toString();
 		Date date = sdf.parse(startTime);
 		SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss.SS");
 		log.info("Application start time " + sdf1.format(date));
-		ApplicationContext context = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
-		Application app = (Application) context.getBean("app");
+		log.info("Spring EL Application");
+		ApplicationContext contextSpring = new AnnotationConfigApplicationContext(SpringELConfiguration.class);
+		Application app = (Application) contextSpring.getBean("app");
+		//log.info("Drools Application");
+		//ApplicationContext contextDrools = new AnnotationConfigApplicationContext(DroolsConfiguration.class);
+		//Application app = (Application) contextDrools.getBean("appDrools");
 		app.processData("C:\\Users\\674448\\Desktop\\Person.psv"/* args[0] */);
 		timeTracker.setEndTime();
 		String endTime = timeTracker.getEndTime().toString();
