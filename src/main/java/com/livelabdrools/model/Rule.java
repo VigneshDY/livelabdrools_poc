@@ -3,11 +3,10 @@ package com.livelabdrools.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class Rule {
+	
 	private List<RuleFact> input = new ArrayList<RuleFact>();
-
+	
 	private List<RuleFact> output = new ArrayList<RuleFact>();
 
 	public Rule(List<RuleFact> ruleFacts) {
@@ -18,11 +17,6 @@ public class Rule {
 				output.add(ruleFact);
 			}
 		}
-
-	}
-
-	public Rule() {
-
 	}
 
 	public List<RuleFact> getInput() {
@@ -40,12 +34,7 @@ public class Rule {
 	public void setOutput(List<RuleFact> output) {
 		this.output = output;
 	}
-
-	@Override
-	public String toString() {
-		return "Rule [input=" + input + ", output=" + output + "]";
-	}
-
+	
 	public List<RuleFact> parseInputRuleFact() {
 		return input;
 	}
@@ -53,4 +42,9 @@ public class Rule {
 	public List<RuleFact> parseOutputRuleFact() {
 		return output;
 	}
+	
+	@Override
+	public String toString() {
+		return "Rule [input=" + input + ", output=" + output + "]";
+	}	
 }

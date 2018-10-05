@@ -1,11 +1,9 @@
 package com.livelabdrools.rule;
 
-import com.livelabdrools.model.Person;
-import com.livelabdrools.model.RuleFact;
-
 import java.util.List;
+
+import com.livelabdrools.model.Person;
 
 public interface RuleEngine {
     public abstract  List<Person> processData(List<Person> personList);
-
 }
