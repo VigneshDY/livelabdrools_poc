@@ -1,10 +1,10 @@
 package com.livelabdrools.reader;
 
-import com.livelabdrools.mapper.DataMapper;
-import com.livelabdrools.model.Data;
+import java.io.File;
+
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import com.livelabdrools.model.Data;
 @Service
 public interface ReadFile<T> {
 	 public abstract Data readFile(File fileToRead, int noOfHeaders);

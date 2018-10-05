@@ -12,24 +12,20 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@Component
 public abstract class DataMapper {
-
-protected ReadFile readFile;
-
-
+	
+	protected ReadFile readFile;
+	
 	protected Map<String, ReadFile> fileReaders;
-
-	/*@PostConstruct
-	public void init() {*/
-	{
+	
+	@PostConstruct
+	public void init() {
 		fileReaders = new HashMap<String, ReadFile>();
 		fileReaders.put("xlsx",new ExcelReader());
 		fileReaders.put("csv",new DelimiterReader(","));
 		fileReaders.put("psv",new DelimiterReader("\\|"));
 		fileReaders.put("tsv",new DelimiterReader("\t"));
 	}
-
+	
 	public abstract List getData(File file);
-
 }
