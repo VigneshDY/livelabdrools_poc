@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RuleTest {
 
-	List<RuleFact> li = new ArrayList<RuleFact>();
+	/*List<RuleFact> li = new ArrayList<RuleFact>();
 	Rule r=new Rule();
 	
 	@Test
@@ -39,5 +39,5 @@ public class RuleTest {
 	public void testParseOutputRuleFact() {
 		assertEquals(li, r.parseOutputRuleFact());
 	}
-
+*/
 }

@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.livelabdrools.model.Person;
 
 public class PersonTest {
-	String str="Hellooo";
+	String str="Data";
 	Person p=new Person();
 	
 	@Test

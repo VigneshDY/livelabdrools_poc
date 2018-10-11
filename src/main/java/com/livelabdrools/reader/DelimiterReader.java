@@ -21,7 +21,7 @@ public class DelimiterReader implements ReadFile {
 		this.DELIMITOR = delimiter;
 	}
 
-	private List<String[]> getHeader(File fileToRead, int noOfHeaderRows) {
+	public List<String[]> getHeader(File fileToRead, int noOfHeaderRows) {
 		int index = 0;
 		List<String[]> headerList = new ArrayList<String[]>();
 		FileReader inputFileReader = null;
@@ -37,7 +37,7 @@ public class DelimiterReader implements ReadFile {
 		} catch (FileNotFoundException fileNotFound) {
 			log.error("File was missing : ", fileNotFound);
 		} catch (IOException ioException) {
-			log.error("Exception occurred while closin the file reader", ioException);
+			log.error("Exception occurred while closing the file reader", ioException);
 		} finally {
 			if(null != inputFileReader) {
 				try {

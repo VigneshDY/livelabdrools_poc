@@ -62,5 +62,4 @@ public class Application {
 		List<Person> personList = droolsRuleEngine.processData(objToProcess);
 		return gson.toJson(personList);
 	}
-	
 }

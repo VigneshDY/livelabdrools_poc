@@ -74,6 +74,7 @@ public class SpringRuleEngine implements RuleEngine {
 				boolean status = inputExpMap.get(rule).getValue(person, Boolean.class);
 				if (status) {
 					person.setTimeZone(rule.getOutput().get(0).getValue().toString());
+					System.out.println(rule.getOutput().get(0).getValue().toString());
 					break;
 				}
 			}

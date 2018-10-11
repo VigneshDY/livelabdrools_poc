@@ -1,7 +1,7 @@
-id|firstname|lastname|loaction|timezone
-1|aab|aa|Chennai
+id|firstname|lastname|location|timeZone
+1|aab|aa|TORONTO
 2|aac|aa|NY
-3|aad|aa|toronto
+3|aad|aa|Chennai
 4|aae|aa|Kolkata
 5|aaf|aa|Chennai
 6|aag|aa|NY
